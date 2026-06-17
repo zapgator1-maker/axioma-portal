@@ -1,0 +1,849 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}{\f2\fnil\fcharset1 Segoe UI Symbol;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang22 <!DOCTYPE html>\par
+<html lang="pt-BR">\par
+<head>\par
+  <meta charset="UTF-8" />\par
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\par
+  <title>Axioma A.I. \f1\emdash  Sistema Operacional Soberano</title>\par
+\par
+  <!-- Fonts -->\par
+  <link rel="preconnect" href="https://fonts.googleapis.com" />\par
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\par
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet" />\par
+\par
+  <!-- GSAP via cdnjs (gratuito) -->\par
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>\par
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>\par
+\par
+  <style>\par
+    /* \f2\u9472?\u9472?\u9472?\f0  RESET & BASE \f2\u9472?\u9472?\u9472?\f0  */\par
+    *, *::before, *::after \{ box-sizing: border-box; margin: 0; padding: 0; \}\par
+\par
+    :root \{\par
+      --navy:  #08101E;\par
+      --amber: #FF6600;\par
+      --cyan:  #00E5FF;\par
+      --white: #E8EDF2;\par
+      --muted: #4A5A6E;\par
+      --glass: rgba(8,16,30,0.72);\par
+    \}\par
+\par
+    html \{ scroll-behavior: smooth; \}\par
+\par
+    body \{\par
+      background: var(--navy);\par
+      color: var(--white);\par
+      font-family: 'Inter', sans-serif;\par
+      font-weight: 300;\par
+      overflow-x: hidden;\par
+    \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  SCANNER LINE (assinatura \'fanica) \f2\u9472?\u9472?\u9472?\f0  */\par
+    .scanner \{\par
+      position: fixed;\par
+      top: 0; left: 0;\par
+      width: 100%; height: 2px;\par
+      background: linear-gradient(90deg, transparent 0%, var(--cyan) 40%, var(--amber) 60%, transparent 100%);\par
+      opacity: 0.35;\par
+      z-index: 9999;\par
+      animation: scan 6s linear infinite;\par
+      pointer-events: none;\par
+    \}\par
+    @keyframes scan \{\par
+      0%   \{ transform: translateY(0); opacity: 0.35; \}\par
+      48%  \{ opacity: 0.35; \}\par
+      50%  \{ opacity: 0; transform: translateY(100vh); \}\par
+      50.1%\{ transform: translateY(0); opacity: 0; \}\par
+      52%  \{ opacity: 0.35; \}\par
+      100% \{ transform: translateY(100vh); opacity: 0.35; \}\par
+    \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  NAV \f2\u9472?\u9472?\u9472?\f0  */\par
+    nav \{\par
+      position: fixed;\par
+      top: 0; left: 0; right: 0;\par
+      z-index: 1000;\par
+      display: flex;\par
+      align-items: center;\par
+      justify-content: space-between;\par
+      padding: 1.25rem 3rem;\par
+      background: rgba(8,16,30,0.85);\par
+      backdrop-filter: blur(12px);\par
+      border-bottom: 1px solid rgba(0,229,255,0.08);\par
+    \}\par
+    .nav-logo \{\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-weight: 900;\par
+      font-size: 1rem;\par
+      letter-spacing: 0.18em;\par
+      color: var(--cyan);\par
+    \}\par
+    .nav-logo span \{ color: var(--amber); \}\par
+    nav ul \{\par
+      list-style: none;\par
+      display: flex;\par
+      gap: 2.5rem;\par
+    \}\par
+    nav ul li a \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 0.8rem;\par
+      letter-spacing: 0.2em;\par
+      text-transform: uppercase;\par
+      color: var(--muted);\par
+      text-decoration: none;\par
+      transition: color 0.25s;\par
+    \}\par
+    nav ul li a:hover \{ color: var(--cyan); \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  HERO \f2\u9472?\u9472?\u9472?\f0  */\par
+    #hero \{\par
+      position: relative;\par
+      height: 100vh;\par
+      display: flex;\par
+      align-items: center;\par
+      justify-content: center;\par
+      overflow: hidden;\par
+    \}\par
+    #hero-video \{\par
+      position: absolute;\par
+      inset: 0;\par
+      width: 100%; height: 100%;\par
+      object-fit: cover;\par
+      opacity: 0.55;\par
+      /* SUBSTITUA o src abaixo pelo caminho do seu v\'eddeo */\par
+    \}\par
+    .hero-overlay \{\par
+      position: absolute;\par
+      inset: 0;\par
+      background: radial-gradient(ellipse at center, transparent 30%, var(--navy) 85%);\par
+    \}\par
+    .hero-content \{\par
+      position: relative;\par
+      text-align: center;\par
+      max-width: 860px;\par
+      padding: 0 2rem;\par
+    \}\par
+    .hero-eyebrow \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 0.75rem;\par
+      letter-spacing: 0.35em;\par
+      text-transform: uppercase;\par
+      color: var(--cyan);\par
+      margin-bottom: 1.5rem;\par
+      opacity: 0;\par
+    \}\par
+    .hero-title \{\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-size: clamp(2.4rem, 6vw, 5.5rem);\par
+      font-weight: 900;\par
+      line-height: 1.05;\par
+      letter-spacing: -0.01em;\par
+      color: var(--white);\par
+      opacity: 0;\par
+    \}\par
+    .hero-title .accent-amber \{ color: var(--amber); \}\par
+    .hero-title .accent-cyan  \{ color: var(--cyan); \}\par
+    .hero-sub \{\par
+      margin-top: 1.8rem;\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 1.05rem;\par
+      letter-spacing: 0.08em;\par
+      color: var(--muted);\par
+      max-width: 520px;\par
+      margin-left: auto;\par
+      margin-right: auto;\par
+      opacity: 0;\par
+    \}\par
+    .hero-cta \{\par
+      margin-top: 2.8rem;\par
+      display: inline-block;\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-weight: 700;\par
+      font-size: 0.85rem;\par
+      letter-spacing: 0.25em;\par
+      text-transform: uppercase;\par
+      color: var(--navy);\par
+      background: var(--amber);\par
+      padding: 0.9rem 2.4rem;\par
+      border: none;\par
+      cursor: pointer;\par
+      text-decoration: none;\par
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));\par
+      transition: background 0.25s, color 0.25s;\par
+      opacity: 0;\par
+    \}\par
+    .hero-cta:hover \{ background: var(--cyan); \}\par
+\par
+    .scroll-hint \{\par
+      position: absolute;\par
+      bottom: 2.5rem;\par
+      left: 50%;\par
+      transform: translateX(-50%);\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 0.7rem;\par
+      letter-spacing: 0.3em;\par
+      text-transform: uppercase;\par
+      color: var(--muted);\par
+      display: flex;\par
+      flex-direction: column;\par
+      align-items: center;\par
+      gap: 0.6rem;\par
+      opacity: 0;\par
+      animation: fadeUp 1s 2.2s forwards;\par
+    \}\par
+    .scroll-hint::after \{\par
+      content: '';\par
+      display: block;\par
+      width: 1px;\par
+      height: 40px;\par
+      background: linear-gradient(to bottom, var(--cyan), transparent);\par
+      animation: pulse 2s infinite;\par
+    \}\par
+    @keyframes pulse \{ 0%,100%\{opacity:0.3\} 50%\{opacity:1\} \}\par
+    @keyframes fadeUp \{ to \{ opacity: 1; transform: translateX(-50%) translateY(-6px); \} \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  SE\'c7\'d5ES GERAIS \f2\u9472?\u9472?\u9472?\f0  */\par
+    section \{\par
+      padding: 7rem 3rem;\par
+      max-width: 1100px;\par
+      margin: 0 auto;\par
+    \}\par
+\par
+    .section-eyebrow \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 0.7rem;\par
+      letter-spacing: 0.4em;\par
+      text-transform: uppercase;\par
+      color: var(--cyan);\par
+      margin-bottom: 1rem;\par
+    \}\par
+    .section-title \{\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-weight: 700;\par
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);\par
+      line-height: 1.1;\par
+      color: var(--white);\par
+      margin-bottom: 1.5rem;\par
+    \}\par
+    .section-title .accent \{ color: var(--amber); \}\par
+    .section-body \{\par
+      font-size: 0.95rem;\par
+      line-height: 1.85;\par
+      color: var(--muted);\par
+      max-width: 640px;\par
+    \}\par
+\par
+    .reveal \{ opacity: 0; transform: translateY(40px); \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  DIVISOR \f2\u9472?\u9472?\u9472?\f0  */\par
+    .divider \{\par
+      width: 100%;\par
+      height: 1px;\par
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--amber), transparent);\par
+      opacity: 0.15;\par
+      margin: 0 auto;\par
+    \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  MANIFESTO \f2\u9472?\u9472?\u9472?\f0  */\par
+    #manifesto \{ position: relative; \}\par
+    .manifesto-grid \{\par
+      display: grid;\par
+      grid-template-columns: 1fr 1fr;\par
+      gap: 1px;\par
+      margin-top: 4rem;\par
+      border: 1px solid rgba(0,229,255,0.08);\par
+    \}\par
+    .manifesto-cell \{\par
+      padding: 2.5rem;\par
+      border: 1px solid rgba(0,229,255,0.05);\par
+      position: relative;\par
+      overflow: hidden;\par
+      opacity: 0;\par
+      transform: translateY(30px);\par
+    \}\par
+    .manifesto-cell::before \{\par
+      content: attr(data-index);\par
+      position: absolute;\par
+      top: 1.2rem; right: 1.5rem;\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-size: 3.5rem;\par
+      font-weight: 900;\par
+      color: rgba(0,229,255,0.04);\par
+      line-height: 1;\par
+    \}\par
+    .manifesto-cell:hover \{ background: rgba(0,229,255,0.03); \}\par
+    .manifesto-cell h3 \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-weight: 700;\par
+      font-size: 1rem;\par
+      letter-spacing: 0.15em;\par
+      text-transform: uppercase;\par
+      color: var(--amber);\par
+      margin-bottom: 0.8rem;\par
+    \}\par
+    .manifesto-cell p \{\par
+      font-size: 0.9rem;\par
+      line-height: 1.75;\par
+      color: var(--muted);\par
+    \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  PALETA \f2\u9472?\u9472?\u9472?\f0  */\par
+    #paleta .palette-row \{\par
+      display: flex;\par
+      gap: 1.5rem;\par
+      margin-top: 3rem;\par
+      flex-wrap: wrap;\par
+    \}\par
+    .swatch \{\par
+      flex: 1;\par
+      min-width: 180px;\par
+      opacity: 0;\par
+      transform: translateY(20px);\par
+    \}\par
+    .swatch-color \{\par
+      height: 120px;\par
+      border-radius: 2px;\par
+      position: relative;\par
+      overflow: hidden;\par
+    \}\par
+    .swatch-color::after \{\par
+      content: '';\par
+      position: absolute;\par
+      inset: 0;\par
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);\par
+    \}\par
+    .swatch-label \{\par
+      margin-top: 1rem;\par
+    \}\par
+    .swatch-label .hex \{\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-size: 0.75rem;\par
+      color: var(--cyan);\par
+      letter-spacing: 0.1em;\par
+    \}\par
+    .swatch-label .name \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 0.85rem;\par
+      color: var(--muted);\par
+      letter-spacing: 0.1em;\par
+      margin-top: 0.2rem;\par
+    \}\par
+    .swatch-label .desc \{\par
+      font-family: 'Inter', sans-serif;\par
+      font-size: 0.75rem;\par
+      color: rgba(74,90,110,0.7);\par
+      margin-top: 0.3rem;\par
+    \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  TIPOGRAFIA \f2\u9472?\u9472?\u9472?\f0  */\par
+    #tipografia .type-showcase \{\par
+      margin-top: 3.5rem;\par
+      display: grid;\par
+      gap: 3rem;\par
+    \}\par
+    .type-item \{ opacity: 0; transform: translateX(-30px); \}\par
+    .type-role \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 0.7rem;\par
+      letter-spacing: 0.35em;\par
+      text-transform: uppercase;\par
+      color: var(--cyan);\par
+      margin-bottom: 0.6rem;\par
+    \}\par
+    .type-sample-orbitron \{\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-weight: 900;\par
+      font-size: clamp(2rem, 4vw, 3.5rem);\par
+      color: var(--white);\par
+      letter-spacing: -0.01em;\par
+      line-height: 1;\par
+    \}\par
+    .type-sample-rajdhani \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-weight: 600;\par
+      font-size: 1.6rem;\par
+      letter-spacing: 0.12em;\par
+      color: var(--amber);\par
+    \}\par
+    .type-sample-inter \{\par
+      font-family: 'Inter', sans-serif;\par
+      font-weight: 300;\par
+      font-size: 1rem;\par
+      line-height: 1.9;\par
+      color: var(--muted);\par
+      max-width: 500px;\par
+    \}\par
+    .type-meta \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 0.75rem;\par
+      color: rgba(74,90,110,0.5);\par
+      margin-top: 0.4rem;\par
+      letter-spacing: 0.1em;\par
+    \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  BRAND SAFETY \f2\u9472?\u9472?\u9472?\f0  */\par
+    #safety .rules-grid \{\par
+      display: grid;\par
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));\par
+      gap: 1px;\par
+      margin-top: 3rem;\par
+      background: rgba(0,229,255,0.06);\par
+    \}\par
+    .rule-card \{\par
+      background: var(--navy);\par
+      padding: 2rem;\par
+      opacity: 0;\par
+      transform: translateY(20px);\par
+    \}\par
+    .rule-card .icon \{\par
+      font-size: 1.4rem;\par
+      margin-bottom: 1rem;\par
+      display: block;\par
+    \}\par
+    .rule-card h4 \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-weight: 700;\par
+      font-size: 0.85rem;\par
+      letter-spacing: 0.18em;\par
+      text-transform: uppercase;\par
+      color: var(--white);\par
+      margin-bottom: 0.6rem;\par
+    \}\par
+    .rule-card p \{\par
+      font-size: 0.85rem;\par
+      line-height: 1.7;\par
+      color: var(--muted);\par
+    \}\par
+    .rule-card.do h4 \{ color: var(--cyan); \}\par
+    .rule-card.dont h4 \{ color: var(--amber); \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  CTA FINAL \f2\u9472?\u9472?\u9472?\f0  */\par
+    #cta \{\par
+      text-align: center;\par
+      padding: 8rem 2rem;\par
+      position: relative;\par
+      overflow: hidden;\par
+    \}\par
+    #cta::before \{\par
+      content: '';\par
+      position: absolute;\par
+      inset: 0;\par
+      background: radial-gradient(ellipse at center bottom, rgba(255,102,0,0.08) 0%, transparent 70%);\par
+    \}\par
+    .cta-title \{\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-weight: 900;\par
+      font-size: clamp(1.8rem, 4vw, 3.2rem);\par
+      color: var(--white);\par
+      margin-bottom: 1rem;\par
+      opacity: 0;\par
+    \}\par
+    .cta-sub \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 1rem;\par
+      letter-spacing: 0.1em;\par
+      color: var(--muted);\par
+      margin-bottom: 3rem;\par
+      opacity: 0;\par
+    \}\par
+    .cta-tag \{\par
+      font-family: 'Rajdhani', sans-serif;\par
+      font-size: 0.75rem;\par
+      letter-spacing: 0.3em;\par
+      text-transform: uppercase;\par
+      color: var(--cyan);\par
+      border: 1px solid rgba(0,229,255,0.25);\par
+      display: inline-block;\par
+      padding: 0.5rem 1.5rem;\par
+      margin-bottom: 2rem;\par
+      opacity: 0;\par
+    \}\par
+    .cta-btn \{\par
+      display: inline-block;\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-weight: 700;\par
+      font-size: 0.8rem;\par
+      letter-spacing: 0.25em;\par
+      text-transform: uppercase;\par
+      color: var(--navy);\par
+      background: var(--amber);\par
+      padding: 1.1rem 3rem;\par
+      border: none;\par
+      cursor: pointer;\par
+      text-decoration: none;\par
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));\par
+      transition: background 0.25s;\par
+      opacity: 0;\par
+    \}\par
+    .cta-btn:hover \{ background: var(--cyan); \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  FOOTER \f2\u9472?\u9472?\u9472?\f0  */\par
+    footer \{\par
+      border-top: 1px solid rgba(0,229,255,0.06);\par
+      padding: 2rem 3rem;\par
+      display: flex;\par
+      justify-content: space-between;\par
+      align-items: center;\par
+    \}\par
+    footer .footer-brand \{\par
+      font-family: 'Orbitron', sans-serif;\par
+      font-size: 0.75rem;\par
+      letter-spacing: 0.2em;\par
+      color: var(--muted);\par
+    \}\par
+    footer .footer-brand span \{ color: var(--amber); \}\par
+    footer .footer-copy \{\par
+      font-family: 'Inter', sans-serif;\par
+      font-size: 0.7rem;\par
+      color: rgba(74,90,110,0.5);\par
+      letter-spacing: 0.05em;\par
+    \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  RESPONSIVO \f2\u9472?\u9472?\u9472?\f0  */\par
+    @media (max-width: 768px) \{\par
+      nav ul \{ display: none; \}\par
+      nav \{ padding: 1rem 1.5rem; \}\par
+      section \{ padding: 5rem 1.5rem; \}\par
+      .manifesto-grid \{ grid-template-columns: 1fr; \}\par
+      footer \{ flex-direction: column; gap: 0.8rem; text-align: center; \}\par
+    \}\par
+\par
+    /* \f2\u9472?\u9472?\u9472?\f0  REDUCED MOTION \f2\u9472?\u9472?\u9472?\f0  */\par
+    @media (prefers-reduced-motion: reduce) \{\par
+      .scanner, .scroll-hint::after \{ animation: none; \}\par
+    \}\par
+  </style>\par
+</head>\par
+<body>\par
+\par
+  <!-- Scanner line (assinatura visual) -->\par
+  <div class="scanner" aria-hidden="true"></div>\par
+\par
+  <!-- NAV -->\par
+  <nav>\par
+    <div class="nav-logo">AXIOMA <span>A.I.</span></div>\par
+    <ul>\par
+      <li><a href="#manifesto">Manifesto</a></li>\par
+      <li><a href="#paleta">Paleta</a></li>\par
+      <li><a href="#tipografia">Tipografia</a></li>\par
+      <li><a href="#safety">Brand Safety</a></li>\par
+      <li><a href="#cta">Acesso</a></li>\par
+    </ul>\par
+  </nav>\par
+\par
+  <!-- HERO -->\par
+  <section id="hero">\par
+    <!--\par
+      INSTRU\'c7\'c3O: Substitua o src abaixo pelo caminho do seu v\'eddeo.\par
+      Exemplo local:  src="assets/axioma-hero.mp4"\par
+      Exemplo GitHub: src="https://raw.githubusercontent.com/SEU_USER/SEU_REPO/main/axioma-hero.mp4"\par
+    -->\par
+    <video\par
+      id="hero-video"\par
+      src="SEU_VIDEO_AQUI.mp4"\par
+      autoplay\par
+      loop\par
+      muted\par
+      playsinline\par
+      poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect fill='%2308101E'/%3E%3C/svg%3E"\par
+    ></video>\par
+    <div class="hero-overlay"></div>\par
+    <div class="hero-content">\par
+      <p class="hero-eyebrow">SISTEMA OPERACIONAL SOBERANO // v2.0</p>\par
+      <h1 class="hero-title">\par
+        O sil\'edcio<br/>\par
+        <span class="accent-amber">obedece</span><br/>\par
+        \'e0 <span class="accent-cyan">vontade.</span>\par
+      </h1>\par
+      <p class="hero-sub">\par
+        Infraestrutura de hiperescala onde determinismo matem\'e1tico elimina o OpEx e a l\'f3gica implac\'e1vel governa cada decis\'e3o.\par
+      </p>\par
+      <a href="#manifesto" class="hero-cta">Iniciar Protocolo</a>\par
+    </div>\par
+    <div class="scroll-hint" aria-label="Role para continuar">SCROLL</div>\par
+  </section>\par
+\par
+  <div class="divider"></div>\par
+\par
+  <!-- MANIFESTO -->\par
+  <section id="manifesto">\par
+    <div class="reveal">\par
+      <p class="section-eyebrow">I // N\'facleo Estrat\'e9gico</p>\par
+      <h2 class="section-title">O <span class="accent">Manifesto</span> da Axioma</h2>\par
+      <p class="section-body">\par
+        N\'e3o competimos no mercado. Redefinimos as regras do mercado. Cada linha de c\'f3digo, cada decis\'e3o arquitetural, cada pixel desta marca obedece a uma \'fanica diretriz: soberania operacional sem concess\'f5es.\par
+      </p>\par
+    </div>\par
+    <div class="manifesto-grid" style="margin-top:3rem;">\par
+      <div class="manifesto-cell" data-index="01">\par
+        <h3>Determinismo</h3>\par
+        <p>Resultado previs\'edvel, repet\'edvel, audit\'e1vel. Nenhuma vari\'e1vel \'e9 acidental. O sistema performa igual sob qualquer carga, em qualquer ambiente, com qualquer operador.</p>\par
+      </div>\par
+      <div class="manifesto-cell" data-index="02">\par
+        <h3>Soberania de Dados</h3>\par
+        <p>Sua infraestrutura n\'e3o depende de terceiros para continuar viva. Arquitetura que garante controle absoluto, do dado bruto \'e0 decis\'e3o final.</p>\par
+      </div>\par
+      <div class="manifesto-cell" data-index="03">\par
+        <h3>OpEx Zero</h3>\par
+        <p>Destrui\'e7\'e3o sistem\'e1tica de despesas operacionais atrav\'e9s de automa\'e7\'e3o com rastreabilidade forense. O que n\'e3o pode ser medido n\'e3o pode ser eliminado; o que pode ser medido, eliminamos.</p>\par
+      </div>\par
+      <div class="manifesto-cell" data-index="04">\par
+        <h3>L\'f3gica Implac\'e1vel</h3>\par
+        <p>1 \'e9 1. N\'e3o existe zona cinza na arquitetura da Axioma. Cada axioma do sistema \'e9 provado antes de ser implantado. Ambiguidade \'e9 um bug de design.</p>\par
+      </div>\par
+    </div>\par
+  </section>\par
+\par
+  <div class="divider"></div>\par
+\par
+  <!-- PALETA -->\par
+  <section id="paleta">\par
+    <div class="reveal">\par
+      <p class="section-eyebrow">II // Identidade Visual</p>\par
+      <h2 class="section-title">Paleta de <span class="accent">Precis\'e3o</span></h2>\par
+      <p class="section-body">\par
+        Cada cor \'e9 uma instru\'e7\'e3o. Aplicadas exclusivamente em ambientes escuros, nunca invertidas, nunca degradadas fora dos gradientes autorizados.\par
+      </p>\par
+    </div>\par
+    <div class="palette-row">\par
+      <div class="swatch">\par
+        <div class="swatch-color" style="background:#08101E; border:1px solid rgba(255,255,255,0.06);"></div>\par
+        <div class="swatch-label">\par
+          <div class="hex">#08101E</div>\par
+          <div class="name">Deep Silicon Navy</div>\par
+          <div class="desc">Fundo absoluto da matriz. Nunca substitu\'eddo.</div>\par
+        </div>\par
+      </div>\par
+      <div class="swatch">\par
+        <div class="swatch-color" style="background:#FF6600;"></div>\par
+        <div class="swatch-label">\par
+          <div class="hex">#FF6600</div>\par
+          <div class="name">Core Amber</div>\par
+          <div class="desc">Calor do processamento. CTAs e \'eanfases prim\'e1rias.</div>\par
+        </div>\par
+      </div>\par
+      <div class="swatch">\par
+        <div class="swatch-color" style="background:#00E5FF;"></div>\par
+        <div class="swatch-label">\par
+          <div class="hex">#00E5FF</div>\par
+          <div class="name">Quantum Cyan</div>\par
+          <div class="desc">Rede cibern\'e9tica. Dados, hologramas, metadados.</div>\par
+        </div>\par
+      </div>\par
+      <div class="swatch">\par
+        <div class="swatch-color" style="background:#E8EDF2; border:1px solid rgba(255,255,255,0.08);"></div>\par
+        <div class="swatch-label">\par
+          <div class="hex">#E8EDF2</div>\par
+          <div class="name">Cold White</div>\par
+          <div class="desc">Texto de alta hierarquia. Frio, t\'e9cnico, preciso.</div>\par
+        </div>\par
+      </div>\par
+    </div>\par
+  </section>\par
+\par
+  <div class="divider"></div>\par
+\par
+  <!-- TIPOGRAFIA -->\par
+  <section id="tipografia">\par
+    <div class="reveal">\par
+      <p class="section-eyebrow">III // Hierarquia Tipogr\'e1fica</p>\par
+      <h2 class="section-title">Palavras <span class="accent">Esculpidas em Metal</span></h2>\par
+      <p class="section-body">\par
+        Tr\'eas faces, tr\'eas pap\'e9is, zero ambiguidade. Cada fonte tem sua fun\'e7\'e3o exata no sistema. Misturar pap\'e9is \'e9 quebrar o protocolo.\par
+      </p>\par
+    </div>\par
+    <div class="type-showcase">\par
+      <div class="type-item">\par
+        <div class="type-role">DISPLAY // T\'edtulos de Impacto</div>\par
+        <div class="type-sample-orbitron">AXIOMA A.I.</div>\par
+        <div class="type-meta">Orbitron 900 \'b7 T\'edtulos H1\f1\endash H2 \f0\'b7 Nunca abaixo de 24px</div>\par
+      </div>\par
+      <div class="type-item">\par
+        <div class="type-role">INTERFACE // Subt\'edtulos & Dados</div>\par
+        <div class="type-sample-rajdhani">LAT\'caNCIA: 247fs // STATUS: ATIVO</div>\par
+        <div class="type-meta">Rajdhani 600 \'b7 HUDs, m\'e9tricas, labels \'b7 Letra espacejada</div>\par
+      </div>\par
+      <div class="type-item">\par
+        <div class="type-role">CORPO // Textos Longos & C\'f3digo</div>\par
+        <div class="type-sample-inter">A arquitetura de hiperescala foi projetada para eliminar qualquer ponto de falha sist\'eamica. Cada camada responde com determinismo total.</div>\par
+        <div class="type-meta">Inter 300\f1\endash 400 \f0\'b7 Corpo de texto \'b7 M\'e1x. 72 chars/linha</div>\par
+      </div>\par
+    </div>\par
+  </section>\par
+\par
+  <div class="divider"></div>\par
+\par
+  <!-- BRAND SAFETY -->\par
+  <section id="safety">\par
+    <div class="reveal">\par
+      <p class="section-eyebrow">IV // Simbologia Protetora</p>\par
+      <h2 class="section-title">Regras de <span class="accent">Brand Safety</span></h2>\par
+      <p class="section-body">\par
+        O Chip e o \'c1tomo s\'e3o ativos de alta integridade. Cada regra abaixo \'e9 um firewall contra degrada\'e7\'e3o da marca.\par
+      </p>\par
+    </div>\par
+    <div class="rules-grid">\par
+      <div class="rule-card do">\par
+        <span class="icon">\f2\u10022?\f0 </span>\par
+        <h4>Ambiente Escuro Obrigat\'f3rio</h4>\par
+        <p>Logo aplicado exclusivamente sobre fundos #08101E ou equivalentes com contraste m\'ednimo 7:1. Fundos claros invalidam o protocolo.</p>\par
+      </div>\par
+      <div class="rule-card do">\par
+        <span class="icon">\f2\u10022?\f0 </span>\par
+        <h4>Luz Volum\'e9trica</h4>\par
+        <p>N\'e9on laranja e cyan s\'e3o as \'fanicas fontes de luz autorizadas nas aplica\'e7\'f5es do logo 3D. Toda outra temperatura de cor \'e9 proibida.</p>\par
+      </div>\par
+      <div class="rule-card dont">\par
+        <span class="icon">\f2\u10005?\f0 </span>\par
+        <h4>Zero Distor\'e7\'e3o</h4>\par
+        <p>O logo n\'e3o \'e9 esticado, rotacionado fora dos eixos de 90\'b0, recolorido ou sobreposto a texturas que reduzam legibilidade abaixo de 80%.</p>\par
+      </div>\par
+      <div class="rule-card dont">\par
+        <span class="icon">\f2\u10005?\f0 </span>\par
+        <h4>Sem Vers\'e3o IA n\'e3o Supervisionada</h4>\par
+        <p>Anima\'e7\'f5es do \'c1tomo e do Chip geradas por IA requerem revis\'e3o manual antes de qualquer entrega. Motion Brush ativo no Kling para blindar letras.</p>\par
+      </div>\par
+      <div class="rule-card do">\par
+        <span class="icon">\f2\u10022?\f0 </span>\par
+        <h4>Zona de Exclus\'e3o</h4>\par
+        <p>Espa\'e7o m\'ednimo ao redor do logo equivalente \'e0 altura da letra "A" do wordmark em todas as quatro dire\'e7\'f5es, sem exce\'e7\'e3o.</p>\par
+      </div>\par
+      <div class="rule-card dont">\par
+        <span class="icon">\f2\u10005?\f0 </span>\par
+        <h4>Sem Gradiente no Logo</h4>\par
+        <p>O wordmark \'e9 sempre monocrom\'e1tico (cyan ou white). Gradientes s\'e3o exclusivos dos elementos gr\'e1ficos de suporte, nunca aplicados na tipografia do logo.</p>\par
+      </div>\par
+    </div>\par
+  </section>\par
+\par
+  <div class="divider"></div>\par
+\par
+  <!-- CTA FINAL -->\par
+  <section id="cta">\par
+    <p class="cta-tag">Acesso Restrito</p>\par
+    <h2 class="cta-title">LPL CORE + CNPJ<br/>Apenas.</h2>\par
+    <p class="cta-sub">Este sistema n\'e3o \'e9 um produto. \'c9 uma infraestrutura de soberania.<br/>O acesso \'e9 condicionado \'e0 qualifica\'e7\'e3o do operador.</p>\par
+    <br/>\par
+    <a href="#" class="cta-btn">Solicitar Qualifica\'e7\'e3o</a>\par
+  </section>\par
+\par
+  <!-- FOOTER -->\par
+  <footer>\par
+    <div class="footer-brand">AXIOMA <span>A.I.</span> // BRAND PORTAL v1.0</div>\par
+    <div class="footer-copy">Sistema Operacional Soberano. 1 \'e9 1.</div>\par
+  </footer>\par
+\par
+  <!-- \f2\u9472?\u9472?\u9472?\f0  GSAP ANIMATIONS \f2\u9472?\u9472?\u9472?\f0  -->\par
+  <script>\par
+    gsap.registerPlugin(ScrollTrigger);\par
+\par
+    // Hero: entrada em sequ\'eancia\par
+    const heroTl = gsap.timeline(\{ defaults: \{ ease: 'power3.out' \} \});\par
+    heroTl\par
+      .to('.hero-eyebrow', \{ opacity: 1, y: 0, duration: 0.9, delay: 0.3 \})\par
+      .to('.hero-title',   \{ opacity: 1, y: 0, duration: 1   \}, '-=0.5')\par
+      .to('.hero-sub',     \{ opacity: 1, y: 0, duration: 0.8 \}, '-=0.6')\par
+      .to('.hero-cta',     \{ opacity: 1, y: 0, duration: 0.7 \}, '-=0.5');\par
+\par
+    // Hero parallax suave no scroll\par
+    gsap.to('#hero-video', \{\par
+      yPercent: 20,\par
+      ease: 'none',\par
+      scrollTrigger: \{\par
+        trigger: '#hero',\par
+        start: 'top top',\par
+        end: 'bottom top',\par
+        scrub: true\par
+      \}\par
+    \});\par
+\par
+    // Reveals gen\'e9ricos\par
+    gsap.utils.toArray('.reveal').forEach(el => \{\par
+      gsap.to(el, \{\par
+        opacity: 1,\par
+        y: 0,\par
+        duration: 0.9,\par
+        ease: 'power3.out',\par
+        scrollTrigger: \{\par
+          trigger: el,\par
+          start: 'top 82%'\par
+        \}\par
+      \});\par
+    \});\par
+\par
+    // C\'e9lulas do manifesto: stagger\par
+    gsap.utils.toArray('.manifesto-cell').forEach((el, i) => \{\par
+      gsap.to(el, \{\par
+        opacity: 1,\par
+        y: 0,\par
+        duration: 0.7,\par
+        delay: i * 0.12,\par
+        ease: 'power2.out',\par
+        scrollTrigger: \{\par
+          trigger: '.manifesto-grid',\par
+          start: 'top 78%'\par
+        \}\par
+      \});\par
+    \});\par
+\par
+    // Swatches da paleta\par
+    gsap.utils.toArray('.swatch').forEach((el, i) => \{\par
+      gsap.to(el, \{\par
+        opacity: 1,\par
+        y: 0,\par
+        duration: 0.6,\par
+        delay: i * 0.1,\par
+        ease: 'power2.out',\par
+        scrollTrigger: \{\par
+          trigger: '.palette-row',\par
+          start: 'top 80%'\par
+        \}\par
+      \});\par
+    \});\par
+\par
+    // Tipografia: slide da esquerda\par
+    gsap.utils.toArray('.type-item').forEach((el, i) => \{\par
+      gsap.to(el, \{\par
+        opacity: 1,\par
+        x: 0,\par
+        duration: 0.7,\par
+        delay: i * 0.15,\par
+        ease: 'power2.out',\par
+        scrollTrigger: \{\par
+          trigger: '.type-showcase',\par
+          start: 'top 80%'\par
+        \}\par
+      \});\par
+    \});\par
+\par
+    // Rule cards\par
+    gsap.utils.toArray('.rule-card').forEach((el, i) => \{\par
+      gsap.to(el, \{\par
+        opacity: 1,\par
+        y: 0,\par
+        duration: 0.6,\par
+        delay: i * 0.08,\par
+        ease: 'power2.out',\par
+        scrollTrigger: \{\par
+          trigger: '.rules-grid',\par
+          start: 'top 80%'\par
+        \}\par
+      \});\par
+    \});\par
+\par
+    // CTA final\par
+    const ctaTl = gsap.timeline(\{\par
+      scrollTrigger: \{ trigger: '#cta', start: 'top 75%' \}\par
+    \});\par
+    ctaTl\par
+      .to('.cta-tag',   \{ opacity: 1, duration: 0.5, ease: 'power2.out' \})\par
+      .to('.cta-title', \{ opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' \}, '-=0.2')\par
+      .to('.cta-sub',   \{ opacity: 1, duration: 0.6 \}, '-=0.4')\par
+      .to('.cta-btn',   \{ opacity: 1, duration: 0.5 \}, '-=0.3');\par
+  </script>\par
+\par
+</body>\par
+</html>\par
+}
+ 
